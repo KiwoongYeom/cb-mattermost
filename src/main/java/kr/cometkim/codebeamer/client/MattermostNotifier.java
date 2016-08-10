@@ -206,8 +206,8 @@ public class MattermostNotifier extends MattermostClient implements TrackerItemL
         String parsed = value;
         parsed = MarkupParser.replaceModificationTags(parsed, "`");
         parsed = MarkupParser.replaceHtmlTags(parsed, "");
-        parsed = MarkupParser.replaceModificationTags("\\{\\{\\{", "```");
-        parsed = MarkupParser.replaceModificationTags("}}}", "```");
+        parsed = MarkupParser.replaceCdStarttextTags("parsed", "```");
+        parsed = MarkupParser.replaceCdEndtextTags("parsed", "```");
         return parsed;
     }
 

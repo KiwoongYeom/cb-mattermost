@@ -10,7 +10,9 @@ public class MarkupParser {
     private static final Pattern LINE_BREAK_PATTERN = Pattern.compile("\\\\|\n|\r\n");
     private static final Pattern HTML_TAG_PATTERN = Pattern.compile("<[^>]+>");
     private static final Pattern MODIFICATION_TAG_PATTERN = Pattern.compile("<span class=\"diff-added-inline\">|<span class=\"diff-deleted-inline\">|<\\/span>");
-
+    private static final Pattern CB_STRING_BOX_START = Pattern.compile("\\{\\{\\{");
+    private static final Pattern CB_STRING_BOX_END = Pattern.compile("}}}");
+    
     public static String replaceLineBreak(String origin, String replacement) {
         return replaceByPattern(LINE_BREAK_PATTERN, origin, replacement, false);
     }
@@ -29,6 +31,14 @@ public class MarkupParser {
 
     public static String replaceModificationTags(String origin, String replacement){
         return replaceByPattern(MODIFICATION_TAG_PATTERN, origin, replacement, true);
+    }
+    
+    public static String replaceCdStarttextTags(String origin, String replacement){
+        return replaceByPattern(CB_STRING_BOX_START, origin, replacement, true);
+    }
+    
+    public static String replaceCdEndtextTags(String origin, String replacement){
+        return replaceByPattern(CB_STRING_BOX_END, origin, replacement, true);
     }
 
     private static String replaceByPattern(Pattern pattern, String origin, String replacement, boolean global){
